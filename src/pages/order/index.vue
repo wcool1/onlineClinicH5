@@ -56,7 +56,7 @@ const onClickTab = (item) => {
     getOrderList(item.name)
 }
 const goDetail=(item)=>{
-
+    router.push(`/detail?oid=${item.out_trade_no}`)
 }
 onMounted(() => {
     //获取订单列表

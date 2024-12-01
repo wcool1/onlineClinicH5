@@ -16,7 +16,7 @@ export default{
     orderList(params){
         return request.get('/order/list',{params})
     },
-    orderDetail(){
+    orderDetail(params){
         return request.get('/order/detail',{params})
     }
 }

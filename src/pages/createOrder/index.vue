@@ -150,10 +150,10 @@
           :show-confirm-button="false"
           v-model:show="showCode"          
           >
-          <van-icon name="cross" @click="closeCode" class="close"/>
-          <div>微信支付</div>
-          <van-image width="150" height="150":src="codeImg"></van-image>
-        </van-dialog>
+            <van-icon name="cross" @click="closeCode" class="close"/>
+            <div>微信支付</div>
+            <van-image width="150" height="150":src="codeImg"></van-image>
+          </van-dialog>
   </div>
 </template>
 
