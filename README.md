@@ -1,2 +1,2 @@
 # onlineClinicH5
-A project used for booking a doctor appointment online 
+The mobile part of a project used for booking a doctor appointment online 
