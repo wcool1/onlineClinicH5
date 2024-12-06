@@ -1,8 +1,8 @@
 <template>
     <RouterView />
 
-    <van-tabbar>
-        <van-tabbar-item v-model="active" 
+    <van-tabbar v-model="active" >
+        <van-tabbar-item 
         v-for="item in router.options.routes[0].children"
         :key="item.path"
         :icon="item.meta.icon"
@@ -27,7 +27,10 @@ const router = useRouter()
 
 onMounted(()=>{
     const data=router.options.routes[0].children
+    // console.log(data)
     active.value=data.findIndex(item=>'/'+item.path===route.path)
+    // console.log(active.value)
 
 })
 </script>
+

@@ -69,7 +69,7 @@
 <script setup>
 import { reactive, getCurrentInstance, ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import qrImg from '@/public/qr.png';//二维码
+import qrImg from '/qr.png';//二维码
 const route = useRoute()
 const router = useRouter()
 const { proxy } = getCurrentInstance()

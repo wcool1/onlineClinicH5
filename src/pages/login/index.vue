@@ -41,7 +41,7 @@ const onSubmit=async()=>{
     const {data}=await proxy.$api.login(form)
    if(data.code===10000){
     localStorage.setItem('h5_token',data.data.token)
-    localStorage.setItem('h5_userInfo',data.data.userInfo)
+    localStorage.setItem('h5_userInfo', JSON.stringify(data.data.userInfo))
     proxy.$router.push('/home')
    }
 }

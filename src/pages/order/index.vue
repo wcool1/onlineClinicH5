@@ -29,23 +29,26 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRouter,useRoute } from 'vue-router';
 import { reactive, getCurrentInstance, ref, onMounted, computed } from 'vue';
 import counter from '@/src/components/counter.vue'
 const router = useRouter()
+const route=useRoute()
 //获取vue接口实例
 const { proxy } = getCurrentInstance()
 const order = ref([])
-const active=ref()
+const active = ref('');
+
 const colorMap={
     '待支付':'#FF6A00',
     '待服务':'#FF6A00',
     '已完成':'#999999',
     '已取消':'#999999'
 }
+//形参的名字即接口所需的参数名,举例传入1，请求时参数为state=1
 const getOrderList=async (state)=>{
     const {data} = await proxy.$api.orderList({state})
-    console.log(data.data)
+    // console.log(data.data)
     data.data.forEach(item => {
         item.timer=item.order_start_time+7200000-Date.now()
     });
@@ -54,13 +57,19 @@ const getOrderList=async (state)=>{
 }
 const onClickTab = (item) => {
     getOrderList(item.name)
+    
 }
 const goDetail=(item)=>{
     router.push(`/detail?oid=${item.out_trade_no}`)
 }
 onMounted(() => {
-    //获取订单列表
-    getOrderList('')
+    // 从路由参数获取状态值
+    const state = route.query.state || ''
+    // 设置 tab 激活项
+    active.value = state ? state : 0
+    // 获取对应状态的订单列表
+    getOrderList(state)
+
 })
 </script>
 
