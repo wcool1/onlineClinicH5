@@ -22,7 +22,7 @@
               <div class="service-text">服务内容</div>
           </template>
       </van-cell>
-      <van-cell-group class="cell"> 
+      <van-cell-group class="cell" > 
           <van-cell >
               <template #title>
                   就诊医院
@@ -162,7 +162,7 @@ import StatusBar from '@/src/components/statusBar.vue';
 import { useRouter } from 'vue-router';
 import { reactive, getCurrentInstance, ref, onMounted, computed } from 'vue';
 import { showNotify } from 'vant';
-import qrImg from '@/public/qr.png';//二维码
+import qrImg from '/qr.png';//二维码
 const router = useRouter()
 //获取vue接口实例
 const { proxy } = getCurrentInstance()
@@ -226,6 +226,7 @@ const companionColumns=computed(()=>{
   })
 })
 const componionName=ref()
+
 const showComponionConfirm=(item)=>{
   form.companion_id=item.selectedOptions[0].value
   componionName.value=item.selectedOptions[0].text
@@ -241,11 +242,18 @@ const submit=async()=>{
   //检查表单每一项是否存在空
   for(let key in form){
       if(!form[key]){
-          showNotify({  message:'请填写完整信息'})
+          showNotify({  message:'请填写完整信息',type:'danger'})
           return
       }
-
   }
+  //检查手机号是否正确
+  if(!(/^1(3[0-9]|4[01456879]|5[0-35-9]|6[2567]|7[0-8]|8[0-9]|9[0-35-9])\d{8}$/
+.test(form.tel))){
+  showNotify({
+        message: '请输入正确的手机号',
+      })
+      return
+    }
   const {data:orderRes} =await proxy.$api.createOrder(form)//键值对
   // console.log(orderRes)
   showCode.value=true
