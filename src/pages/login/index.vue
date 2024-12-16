@@ -26,7 +26,7 @@
 
         <div class="guest-login-tip">
                 <el-icon><InfoFilled /></el-icon>
-                <span>游客账号：15623511267</span>
+                <span>游客账号：15623511268</span>
                 <span>密码：qwer12</span>
               </div>
         <div class="btn" style="margin: 16px;">
