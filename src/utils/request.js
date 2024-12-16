@@ -6,15 +6,16 @@ const imageProxyUrl = import.meta.env.VITE_IMAGE_PROXY_URL
 
 const convertHttpUrls = (data) => {
   if (typeof data === 'string' && data.startsWith('http:')) {
-    // 使用图片代理
-    return `/image-proxy${data.replace('http:', '')}`
+    // 修改代理路径的处理方式
+    const url = new URL(data);
+    return `/image-proxy${url.pathname}${url.search}${url.hash}`; 
   }
   if (typeof data === 'object' && data !== null) {
     for (let key in data) {
-      data[key] = convertHttpUrls(data[key])
+      data[key] = convertHttpUrls(data[key]);
     }
   }
-  return data
+  return data;
 }
 //创建axios实例http
 const http=axios.create({
