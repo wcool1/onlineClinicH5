@@ -44,8 +44,8 @@ http.interceptors.response.use(function (response) {
     // 递归转换所有 HTTP 链接为相对路径
     const convertHttpUrls = (data) => {
       if (typeof data === 'string' && data.startsWith('http:')) {
-        // 替换为目标服务器的HTTPS地址
-        return data.replace('http://159.75.169.224', 'https://159.75.169.224')
+        // 将HTTP链接转为通过代理访问
+        return data.replace('http://159.75.169.224', '/image-proxy')
       }
       if (typeof data === 'object' && data !== null) {
         for (let key in data) {
