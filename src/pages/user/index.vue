@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <div class="user">
-            <van-image class="img" width="100" height="100 " :src="userInfo.avatar"></van-image>
+            <van-image class="img" width="100" height="100 " :src="userImg"></van-image>
             <div class="text">{{userInfo.name}}</div>
         </div>
     
         <div class="order">
             <div class="top">
-                <div class="text1">我的订单</div>
-                <div class="text2">全部</div>
+                <div class="text1" >我的订单</div>
+                <div class="text2" @click="goOrder(0)  ">全部</div>
             </div>
             <div class="bottom">
                 <div class="item">
@@ -82,6 +82,7 @@
 //导入相关组件、方法
 import { reactive, getCurrentInstance, ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import userImg from '/user.jpg'  // 新增图片导入
 
 //定义自带的变量
 const route = useRoute()

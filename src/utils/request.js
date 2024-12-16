@@ -1,22 +1,7 @@
 
 //导入axios
 import axios from 'axios'
-// 处理http静态资源问题
-const imageProxyUrl = import.meta.env.VITE_IMAGE_PROXY_URL
 
-const convertHttpUrls = (data) => {
-  if (typeof data === 'string' && data.startsWith('http:')) {
-    // 修改代理路径的处理方式
-    const url = new URL(data);
-    return `/image-proxy${url.pathname}${url.search}${url.hash}`; 
-  }
-  if (typeof data === 'object' && data !== null) {
-    for (let key in data) {
-      data[key] = convertHttpUrls(data[key]);
-    }
-  }
-  return data;
-}
 //创建axios实例http
 const http=axios.create({
     baseURL:"https://v3pz.itndedu.com/v3pz",
@@ -56,8 +41,6 @@ http.interceptors.response.use(function (response) {
       localStorage.removeItem('h5_user')
       window.location.href = window.location.origin    
     }
-
-    response.data = convertHttpUrls(response.data)
     return response;//返回响应输数据
   }, function (error) {
     // 对响应错误做点什么

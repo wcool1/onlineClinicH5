@@ -8,29 +8,28 @@
     <van-search v-model="serchValue" shape="round" placeholder="请输入搜索关键词" class="search-input"></van-search>
   </div>
   <van-swipe class="my-swiper" height="170" :autoplay="3000" indicator-color="white">
-    <van-swipe-item v-for="item in homeData.slides" :key="item.id">
-      <van-image radius="5" :src="item.pic_image_url"></van-image>
+    <van-swipe-item v-for="item in slides" >
+      <van-image radius="5" :src="item"></van-image>
     </van-swipe-item>
   </van-swipe>
   <!-- nav -->
   <van-row justify="space-around" >
     <van-col span="11" 
-     v-for="(item,index) in homeData.nav2s"
-      :key="item.id"
+     v-for="(item,index) in banners"
       class="center-img"
       @click="goOrderTwo(index)"
     >
-      <van-image :src="item.pic_image_url"></van-image>
+      <van-image :src="item"></van-image>
     </van-col>
   </van-row>
   <!-- 医院信息 -->
    <van-row class="yy-list" justify="space-around"  
-   v-for="item in homeData.hospitals"
+   v-for="(item, index) in homeData.hospitals" 
    @click="getOrder(item)">
    
     <van-col span="6" >
         <van-image 
-        :src="item.avatar_url"
+        :src="hospitals[index]"
         width="100"
         height="90"
         ></van-image>
@@ -51,7 +50,22 @@
 <script setup>
 import { reactive, getCurrentInstance, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-
+//图床资源
+const banners=[
+'https://www.helloimg.com/i/2024/12/16/675fc243c8021.png',
+'https://www.helloimg.com/i/2024/12/16/675fc243dd16a.png'
+]
+const hospitals=[
+  'https://www.helloimg.com/i/2024/12/16/675fc725c8822.png',
+  'https://www.helloimg.com/i/2024/12/16/675fc7263c462.png',
+  'https://www.helloimg.com/i/2024/12/16/675fc726a04e0.png',
+  'https://www.helloimg.com/i/2024/12/16/675fc726d26a3.png',
+  'https://www.helloimg.com/i/2024/12/16/675fc72715f9e.png'
+]
+const slides=[
+  'https://www.helloimg.com/i/2024/12/16/675fc91da0f7d.png',
+  'https://www.helloimg.com/i/2024/12/16/675fc91d5b47a.png'
+]
 const router = useRouter()
 //获取vue接口实例
 const { proxy } = getCurrentInstance()

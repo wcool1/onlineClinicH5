@@ -10,7 +10,7 @@
         </van-tabs>
         <van-row @click="goDetail(item)" v-for="item in order" :key="item.out_trade_no">
             <van-col span="5">
-                <van-image width="50" height="50" radius="5" :src="item.serviceImg"></van-image>
+                <van-image width="50" height="50" radius="5" :src=" orderImg"></van-image>
             </van-col>
             <van-col span="14">
                 <div class="text1">{{item.service_name}}</div>
@@ -32,6 +32,8 @@
 import { useRouter,useRoute } from 'vue-router';
 import { reactive, getCurrentInstance, ref, onMounted, computed } from 'vue';
 import counter from '@/src/components/counter.vue'
+import orderImg from '/order.png'  // 新增图片导入
+
 const router = useRouter()
 const route=useRoute()
 //获取vue接口实例
