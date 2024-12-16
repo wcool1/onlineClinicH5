@@ -40,20 +40,20 @@ http.interceptors.response.use(function (response) {
       localStorage.removeItem('h5_user')
       window.location.href = window.location.origin    
     }
-    
+
     // 递归转换所有 HTTP 链接为相对路径
     const convertHttpUrls = (data) => {
       if (typeof data === 'string' && data.startsWith('http:')) {
-        return data.replace(/^http:\/\/[^/]+/, '') // 转换为相对路径
+        // 替换为目标服务器的HTTPS地址
+        return data.replace('http://159.75.169.224', 'https://159.75.169.224')
       }
-      if (typeof data === 'object') {
+      if (typeof data === 'object' && data !== null) {
         for (let key in data) {
           data[key] = convertHttpUrls(data[key])
         }
       }
       return data
     }
-    
     response.data = convertHttpUrls(response.data)
     return response;//返回响应输数据
   }, function (error) {
