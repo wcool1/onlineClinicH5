@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="user">
-            <van-image class="img" width="100" height="100 " :src="userImg"></van-image>
+            <van-image class="img" width="60vw" height="100 " :src="userImg"></van-image>
             <div class="text">{{userInfo.name}}</div>
         </div>
     
@@ -113,7 +113,7 @@ const logout=()=>{
     overflow: hidden;
 
     .user {
-        width: 95%;
+        width: 100%;
         height: 200px;
         background-color: #fff;
         text-align: center;
@@ -122,6 +122,7 @@ const logout=()=>{
 
         .img {
             margin-top: 30px;
+
         }
 
         .text {
