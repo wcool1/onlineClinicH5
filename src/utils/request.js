@@ -6,13 +6,11 @@ const imageProxyUrl = import.meta.env.VITE_IMAGE_PROXY_URL
 
 const convertHttpUrls = (data) => {
   if (typeof data === 'string' && data.startsWith('http:')) {
-    if (import.meta.env.DEV) {
-      // 开发环境使用代理
-      return data.replace('http://159.75.169.224', '/image-proxy')
-    } else {
-      // 生产环境直接使用原始地址
-      return data
-    }
+    // 将 HTTP 替换为 HTTPS
+    return data.replace('http://', 'https://');
+    
+    // 或者使用相对协议
+    // return data.replace('http://', '//');
   }
   if (typeof data === 'object' && data !== null) {
     for (let key in data) {
