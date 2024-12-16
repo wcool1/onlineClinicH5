@@ -40,6 +40,21 @@ http.interceptors.response.use(function (response) {
       localStorage.removeItem('h5_user')
       window.location.href = window.location.origin    
     }
+    
+    // 递归转换所有 HTTP 链接为相对路径
+    const convertHttpUrls = (data) => {
+      if (typeof data === 'string' && data.startsWith('http:')) {
+        return data.replace(/^http:\/\/[^/]+/, '') // 转换为相对路径
+      }
+      if (typeof data === 'object') {
+        for (let key in data) {
+          data[key] = convertHttpUrls(data[key])
+        }
+      }
+      return data
+    }
+    
+    response.data = convertHttpUrls(response.data)
     return response;//返回响应输数据
   }, function (error) {
     // 对响应错误做点什么
