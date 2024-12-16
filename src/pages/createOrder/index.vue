@@ -12,7 +12,7 @@
               <van-image
               width="25"
               height="25"
-              :src="createInfo.service.serviceImg"
+              :src="orderImg"
               >
               </van-image>
               <span class="server-name">{{ createInfo.service.serviceName }}</span>
@@ -162,6 +162,7 @@ import StatusBar from '@/src/components/statusBar.vue';
 import { useRouter } from 'vue-router';
 import { reactive, getCurrentInstance, ref, onMounted, computed } from 'vue';
 import { showNotify } from 'vant';
+import orderImg from '/order.png'  // 订单图片导入
 import qrImg from '/qr.png';//二维码
 const router = useRouter()
 //获取vue接口实例

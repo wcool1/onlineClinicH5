@@ -32,7 +32,7 @@
 import { useRouter,useRoute } from 'vue-router';
 import { reactive, getCurrentInstance, ref, onMounted, computed } from 'vue';
 import counter from '@/src/components/counter.vue'
-import orderImg from '/order.png'  // 新增图片导入
+import orderImg from '/order.png'  // 订单图片导入
 
 const router = useRouter()
 const route=useRoute()
