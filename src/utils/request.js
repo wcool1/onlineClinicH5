@@ -6,11 +6,8 @@ const imageProxyUrl = import.meta.env.VITE_IMAGE_PROXY_URL
 
 const convertHttpUrls = (data) => {
   if (typeof data === 'string' && data.startsWith('http:')) {
-    // 将 HTTP 替换为 HTTPS
-    return data.replace('http://', 'https://');
-    
-    // 或者使用相对协议
-    // return data.replace('http://', '//');
+    // 使用图片代理
+    return `/image-proxy${data.replace('http:', '')}`
   }
   if (typeof data === 'object' && data !== null) {
     for (let key in data) {

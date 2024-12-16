@@ -14,9 +14,7 @@ export default defineConfig({
         target: process.env.VITE_IMAGE_PROXY_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/image-proxy/, ''),
-        secure: false,
-        // 添加 HTTPS 配置
-        protocolRewrite: 'https'
+        secure: false
       }
     }
   },
