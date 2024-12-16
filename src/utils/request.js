@@ -1,6 +1,26 @@
 
 //导入axios
 import axios from 'axios'
+// 处理http静态资源问题
+const imageProxyUrl = import.meta.env.VITE_IMAGE_PROXY_URL
+
+const convertHttpUrls = (data) => {
+  if (typeof data === 'string' && data.startsWith('http:')) {
+    if (import.meta.env.DEV) {
+      // 开发环境使用代理
+      return data.replace('http://159.75.169.224', '/image-proxy')
+    } else {
+      // 生产环境直接使用原始地址
+      return data
+    }
+  }
+  if (typeof data === 'object' && data !== null) {
+    for (let key in data) {
+      data[key] = convertHttpUrls(data[key])
+    }
+  }
+  return data
+}
 //创建axios实例http
 const http=axios.create({
     baseURL:"https://v3pz.itndedu.com/v3pz",
@@ -41,19 +61,6 @@ http.interceptors.response.use(function (response) {
       window.location.href = window.location.origin    
     }
 
-    // 递归转换所有 HTTP 链接为相对路径
-    const convertHttpUrls = (data) => {
-      if (typeof data === 'string' && data.startsWith('http:')) {
-        // 将HTTP链接转为通过代理访问
-        return data.replace('http://159.75.169.224', '/image-proxy')
-      }
-      if (typeof data === 'object' && data !== null) {
-        for (let key in data) {
-          data[key] = convertHttpUrls(data[key])
-        }
-      }
-      return data
-    }
     response.data = convertHttpUrls(response.data)
     return response;//返回响应输数据
   }, function (error) {

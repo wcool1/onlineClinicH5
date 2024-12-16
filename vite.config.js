@@ -11,9 +11,10 @@ export default defineConfig({
     // 使用中间代理服务器处理HTTP请求
     proxy: {
       '/image-proxy': {
-        target: 'http://159.75.169.224',
+        target: process.env.VITE_IMAGE_PROXY_URL,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/image-proxy/, '')
+        rewrite: (path) => path.replace(/^\/image-proxy/, ''),
+        secure: false
       }
     }
   },
